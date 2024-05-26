@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  laravel:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_USER=myapp
+      - MARIADB_PASSWORD=pass
+      - MARIADB_DATABASE=laravel
+      - LARAVEL_DATABASE_NAME=laravel
+      - LARAVEL_DATABASE_USER=myapp
+    depends_on:
+      - mariadb
+    volumes:
+      - ./:/app
+      - ./config/database.php:/app/config/database.php
+    networks:
+      - laravel-network
+  mariadb:
+    image: 'mariadb:latest'
+    container_name: mysql_container
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_USER=myapp
+      - MARIADB_PASSWORD=pass
+      - MARIADB_DATABASE=laravel
+      - MARIADB_ROOT_PASSWORD=pass
+    networks:
+      - laravel-network
+  adminer:
+    image: 'adminer:latest'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mariadb
+    networks:
+      - laravel-network
+volumes:
+  laravel-sync:
+
+networks:
+  laravel-network:
+    driver: bridge
