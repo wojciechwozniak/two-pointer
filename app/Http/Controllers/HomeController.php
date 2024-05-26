@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ApiRequest;
 
 class HomeController extends Controller
 {
-    public function calculateTrappedWater(Request $request)
+    public function calculateTrappedWater(ApiRequest $request): \Illuminate\Http\JsonResponse
     {
         $heights = $request->input('heights');
 
