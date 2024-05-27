@@ -3,6 +3,7 @@ version: '3'
 services:
   laravel:
     build: .
+    container_name: two-pointer
     ports:
       - "8000:8000"
     environment:
@@ -22,6 +23,8 @@ services:
       - laravel-network
   mariadb:
     image: 'mariadb:latest'
+    ports:
+      - '3306:3306'
     container_name: mysql_container
     environment:
       - ALLOW_EMPTY_PASSWORD=no
@@ -29,6 +32,8 @@ services:
       - MARIADB_PASSWORD=pass
       - MARIADB_DATABASE=laravel
       - MARIADB_ROOT_PASSWORD=pass
+    volumes:
+      - ./docker-compose/mysql/mysql_container.sql:/docker-entrypoint-initdb.d/mysql_container.sql
     networks:
       - laravel-network
   adminer:
