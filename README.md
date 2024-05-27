@@ -18,3 +18,4 @@ This is a Laravel application that calculates the amount of water trapped betwee
    ```bash
    docker-compose up --build -d
    ```
+3. In the project root directory, you can find a [Trap.postman_collection.json](Trap.postman_collection.json) file that you can import into Postman to test the API.
