@@ -16,7 +16,7 @@ This is a PHP API based on Laravel, utilizing MariaDB and Apache. It demonstrate
    ```
 2. Build the Docker containers:
    ```bash
-   docker-compose up --build -d
+   docker-compose up -d
    ```
 3. In the project root directory, you can find a [Trap.postman_collection.json](Trap.postman_collection.json) file that you can import into Postman to test the API.
 
