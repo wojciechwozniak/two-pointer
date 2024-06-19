@@ -1,8 +1,20 @@
 version: '3'
 
 services:
+  apache:
+    image: 'httpd:latest'
+    ports:
+      - '80:80'
+    volumes:
+        - ./:/var/www/html
+    depends_on:
+      - laravel
+    networks:
+      - laravel-network
   laravel:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: two-pointer
     ports:
       - "8000:8000"
@@ -12,8 +24,6 @@ services:
       - MARIADB_USER=myapp
       - MARIADB_PASSWORD=pass
       - MARIADB_DATABASE=laravel
-      - LARAVEL_DATABASE_NAME=laravel
-      - LARAVEL_DATABASE_USER=myapp
     depends_on:
       - mariadb
     volumes:
@@ -44,9 +54,6 @@ services:
       - mariadb
     networks:
       - laravel-network
-volumes:
-  laravel-sync:
-
 networks:
   laravel-network:
     driver: bridge

@@ -9,9 +9,9 @@ class LogModel extends Model
 {
     use HasFactory;
 
-    public function createLog(string $action, array $heights, int $trapped_water){
+    public static function createLog(string $action, array $heights, int $trapped_water){
         $log = new LogModel();
-        $log->action = 'miss';
+        $log->action = $action;
         $log->query = json_encode($heights);
         $log->response = $trapped_water;
         $log->save();

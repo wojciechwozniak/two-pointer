@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ApiRequest extends FormRequest
 {
@@ -17,7 +19,6 @@ class ApiRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -35,4 +36,5 @@ class ApiRequest extends FormRequest
             'heights.*.integer' => 'Error 1004: Each element in the Heights field must be an integer.'
         ];
     }
+
 }
